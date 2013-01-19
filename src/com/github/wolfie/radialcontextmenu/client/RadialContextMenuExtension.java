@@ -7,7 +7,6 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ContextMenuEvent;
 import com.google.gwt.event.dom.client.ContextMenuHandler;
@@ -77,10 +76,10 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		event.getNativeEvent();
 
 		canvas = Canvas.createIfSupported();
+		canvas.setStyleName("h-radialcontextmenu");
 		canvas.getElement().setPropertyInt("width", CANVAS_SIZE_PX);
 		canvas.getElement().setPropertyInt("height", CANVAS_SIZE_PX);
 		final Style canvasStyle = canvas.getElement().getStyle();
-		canvasStyle.setPosition(Position.ABSOLUTE);
 
 		paintAndHighlight(-1);
 

@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+.h-radialcontextmenu {
+	position: absolute;
+}
+
+.h-radialcontextmenu:focus {
+	outline: none;
+}
