@@ -40,16 +40,13 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 				}
 			} else if (event.getTypeInt() == Event.ONMOUSEMOVE) {
 				final NativeEvent mEvent = event.getNativeEvent();
-				final Element target = Element.as(mEvent.getEventTarget());
-				if (target == canvas.getElement()) {
-					handleCanvasMouseMove(mEvent);
-				}
+				handleCanvasMouseMove(mEvent);
 			}
 		}
 	}
 
-	private static final int CANVAS_SIZE_PX = 200;
-	private static final double OUTER_RADIUS = 100;
+	private static final int CANVAS_SIZE_PX = 300;
+	private static final double OUTER_RADIUS = CANVAS_SIZE_PX / 2;
 	private static final double INNER_RADIUS = 50;
 	private Canvas canvas;
 	private HandlerRegistration previewHandler = null;
@@ -112,7 +109,7 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 			previewHandler = null;
 		}
 
-		if (canvas.getParent() != null) {
+		if (canvas != null && canvas.getParent() != null) {
 			canvas.removeFromParent();
 		}
 	}
