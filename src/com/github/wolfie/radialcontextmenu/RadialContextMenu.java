@@ -3,9 +3,9 @@ package com.github.wolfie.radialcontextmenu;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.wolfie.radialcontextmenu.client.RadialContextMenuClientRpc;
-import com.github.wolfie.radialcontextmenu.client.RadialContextMenuServerRpc;
-import com.github.wolfie.radialcontextmenu.client.RadialContextMenuState;
+import com.github.wolfie.radialcontextmenu.shared.RadialContextMenuClientRpc;
+import com.github.wolfie.radialcontextmenu.shared.RadialContextMenuServerRpc;
+import com.github.wolfie.radialcontextmenu.shared.RadialContextMenuState;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.ui.AbstractComponent;
 

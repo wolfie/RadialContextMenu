@@ -18,6 +18,7 @@ import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.VConsole;
 
 public class RadialContextMenuExtension implements ContextMenuHandler {
@@ -48,7 +49,6 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	}
 
 	private static final int CANVAS_SIZE_PX = 200;
-	private static final String CANVAS_SIZE = CANVAS_SIZE_PX + "px";
 	private static final double OUTER_RADIUS = 100;
 	private static final double INNER_RADIUS = 50;
 	private Canvas canvas;
@@ -69,7 +69,11 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 			return;
 		}
 
-		VConsole.log(event.toDebugString());
+		if (!Canvas.isSupported()) {
+			debug("Canvas not supported by this browser: "
+					+ BrowserInfo.getBrowserString());
+			return;
+		}
 
 		event.getNativeEvent();
 

@@ -1,4 +1,4 @@
-package com.github.wolfie.radialcontextmenu.client;
+package com.github.wolfie.radialcontextmenu.shared;
 
 import com.vaadin.shared.communication.ClientRpc;
 
