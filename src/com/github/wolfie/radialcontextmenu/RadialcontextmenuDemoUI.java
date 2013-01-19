@@ -6,6 +6,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -35,24 +36,26 @@ public class RadialcontextmenuDemoUI extends UI {
 		layout.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
 
 		radialContextMenu = new RadialContextMenu();
-		radialContextMenu.addMenuItem("test", "red", new MenuSelectListener() {
-			@Override
-			public void menuSelected(final MenuSelectEvent e) {
-				System.out.println("test");
-			}
-		});
-		radialContextMenu.addMenuItem("test 2", "blue",
+		radialContextMenu.addMenuItem("First and Close", "red",
 				new MenuSelectListener() {
 					@Override
 					public void menuSelected(final MenuSelectEvent e) {
-						System.out.println("test2");
+						Notification.show("First Item Pressed");
+						e.getSource().closeIfOpen();
+					}
+				});
+		radialContextMenu.addMenuItem("Second Item", "blue",
+				new MenuSelectListener() {
+					@Override
+					public void menuSelected(final MenuSelectEvent e) {
+						Notification.show("Second Item Pressed");
 					}
 				});
 		radialContextMenu.addMenuItem("test 3", "green",
 				new MenuSelectListener() {
 					@Override
 					public void menuSelected(final MenuSelectEvent e) {
-						System.out.println("test3");
+						Notification.show("Third Item Pressed");
 					}
 				});
 		radialContextMenu.extend(button);
