@@ -102,7 +102,7 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		event.preventDefault();
 	}
 
-	private void debug(final String string) {
+	private static void debug(final String string) {
 		VConsole.log("[RadialContextMenuExtension] " + string);
 	}
 
