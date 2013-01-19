@@ -75,6 +75,8 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 			return;
 		}
 
+		close();
+
 		event.getNativeEvent();
 
 		canvas = Canvas.createIfSupported();
