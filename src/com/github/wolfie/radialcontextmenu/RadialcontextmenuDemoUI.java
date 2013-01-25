@@ -2,6 +2,7 @@ package com.github.wolfie.radialcontextmenu;
 
 import com.github.wolfie.radialcontextmenu.RadialContextMenu.MenuSelectEvent;
 import com.github.wolfie.radialcontextmenu.RadialContextMenu.MenuSelectListener;
+import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -14,6 +15,7 @@ import com.vaadin.ui.VerticalLayout;
  * Main UI class
  */
 @SuppressWarnings("serial")
+@Title("Radial Context Menu Demo")
 public class RadialcontextmenuDemoUI extends UI {
 
 	private RadialContextMenu radialContextMenu;
