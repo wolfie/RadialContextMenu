@@ -47,6 +47,9 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	private static final int CANVAS_SIZE_PX = 300;
 	private static final double OUTER_RADIUS = CANVAS_SIZE_PX / 2;
 	private static final double INNER_RADIUS = 50;
+
+	private static final String CANVAS_CLASSNAME = "h-radialcontextmenu";
+
 	private Canvas canvas;
 	private HandlerRegistration previewHandler = null;
 	private List<String> captions;
@@ -76,7 +79,7 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		event.getNativeEvent();
 
 		canvas = Canvas.createIfSupported();
-		canvas.setStyleName("h-radialcontextmenu");
+		canvas.setStyleName(CANVAS_CLASSNAME);
 		canvas.getElement().setPropertyInt("width", CANVAS_SIZE_PX);
 		canvas.getElement().setPropertyInt("height", CANVAS_SIZE_PX);
 		final Style canvasStyle = canvas.getElement().getStyle();
