@@ -7,3 +7,7 @@
 .h-radialcontextmenu:focus {
 	outline: none;
 }
+
+.h-radialcontextmenu .menu {
+	background-color: #BBB;
+}

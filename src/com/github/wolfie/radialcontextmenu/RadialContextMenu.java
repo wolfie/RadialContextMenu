@@ -50,14 +50,13 @@ public class RadialContextMenu extends AbstractExtension {
 		super.extend(target);
 	}
 
-	public void addMenuItem(final String caption, final String cssColor,
+	public void addMenuItem(final String caption,
 			final MenuSelectListener listener) {
 		if (listener == null) {
 			throw new IllegalArgumentException("listener may not be null");
 		}
 		listeners.add(listener);
 		getState().captions.add(caption);
-		getState().colors.add(cssColor);
 	}
 
 	@Override

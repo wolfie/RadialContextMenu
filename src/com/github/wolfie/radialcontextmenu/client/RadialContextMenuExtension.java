@@ -1,5 +1,6 @@
 package com.github.wolfie.radialcontextmenu.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.canvas.client.Canvas;
@@ -18,9 +19,11 @@ import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.BrowserInfo;
+import com.vaadin.client.ComputedStyle;
 import com.vaadin.client.VConsole;
 
 public class RadialContextMenuExtension implements ContextMenuHandler {
+
 	public interface ItemClickListener {
 		void itemClicked(int item);
 	}
@@ -49,6 +52,7 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	private static final double INNER_RADIUS = 50;
 
 	private static final String CANVAS_CLASSNAME = "h-radialcontextmenu";
+	private static final String MENUITEM_CLASSNAME = "menu";
 
 	private Canvas canvas;
 	private HandlerRegistration previewHandler = null;
@@ -178,6 +182,10 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	}
 
 	private void paintAndHighlight(final int item) {
+		if (colors == null) {
+			setupMenuItemStyles();
+		}
+
 		final Context2d ctx = canvas.getContext2d();
 		ctx.clearRect(0, 0, canvas.getOffsetHeight(), canvas.getOffsetHeight());
 
@@ -232,9 +240,29 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		}
 	}
 
-	public void setup(final List<String> captions, final List<String> colors) {
+	private void setupMenuItemStyles() {
+		final com.google.gwt.user.client.Element root = DOM.createDiv();
+		root.setClassName(CANVAS_CLASSNAME);
+		RootPanel.get().getElement().appendChild(root);
+
+		colors = new ArrayList<String>();
+
+		for (final String caption : captions) {
+			final com.google.gwt.user.client.Element menuItem = DOM.createDiv();
+			menuItem.setClassName(MENUITEM_CLASSNAME);
+			menuItem.setAttribute("caption", caption);
+			root.appendChild(menuItem);
+			final ComputedStyle style = new ComputedStyle(menuItem);
+			final String bgColor = style.getProperty("background-color");
+			colors.add(bgColor);
+		}
+
+		root.removeFromParent();
+	}
+
+	public void setup(final List<String> captions) {
 		this.captions = captions;
-		this.colors = colors;
+		colors = null;
 	}
 
 	public void setItemClickListener(final ItemClickListener listener) {

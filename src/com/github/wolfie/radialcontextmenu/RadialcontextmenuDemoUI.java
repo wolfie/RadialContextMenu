@@ -2,6 +2,7 @@ package com.github.wolfie.radialcontextmenu;
 
 import com.github.wolfie.radialcontextmenu.RadialContextMenu.MenuSelectEvent;
 import com.github.wolfie.radialcontextmenu.RadialContextMenu.MenuSelectListener;
+import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Alignment;
@@ -16,6 +17,7 @@ import com.vaadin.ui.VerticalLayout;
  */
 @SuppressWarnings("serial")
 @Title("Radial Context Menu Demo")
+@Theme("demo")
 public class RadialcontextmenuDemoUI extends UI {
 
 	private RadialContextMenu radialContextMenu;
@@ -38,7 +40,7 @@ public class RadialcontextmenuDemoUI extends UI {
 		layout.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
 
 		radialContextMenu = new RadialContextMenu();
-		radialContextMenu.addMenuItem("First and Close", "#e61f6f",
+		radialContextMenu.addMenuItem("First and Close",
 				new MenuSelectListener() {
 					@Override
 					public void menuSelected(final MenuSelectEvent e) {
@@ -46,20 +48,18 @@ public class RadialcontextmenuDemoUI extends UI {
 						e.getSource().closeIfOpen();
 					}
 				});
-		radialContextMenu.addMenuItem("Second Item", "#00b4f0",
-				new MenuSelectListener() {
-					@Override
-					public void menuSelected(final MenuSelectEvent e) {
-						Notification.show("Second Item Pressed");
-					}
-				});
-		radialContextMenu.addMenuItem("Third Item", "#41b527",
-				new MenuSelectListener() {
-					@Override
-					public void menuSelected(final MenuSelectEvent e) {
-						Notification.show("Third Item Pressed");
-					}
-				});
+		radialContextMenu.addMenuItem("Second Item", new MenuSelectListener() {
+			@Override
+			public void menuSelected(final MenuSelectEvent e) {
+				Notification.show("Second Item Pressed");
+			}
+		});
+		radialContextMenu.addMenuItem("Third Item", new MenuSelectListener() {
+			@Override
+			public void menuSelected(final MenuSelectEvent e) {
+				Notification.show("Third Item Pressed");
+			}
+		});
 		radialContextMenu.extend(button);
 	}
 }
