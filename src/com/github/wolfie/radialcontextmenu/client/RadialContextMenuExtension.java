@@ -58,6 +58,8 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	private HandlerRegistration previewHandler = null;
 	private List<String> captions;
 	private List<String> colors;
+	private List<Integer> lineWidths;
+	private List<String> lineColors;
 	private int itemBeingHovered;
 	private ItemClickListener itemClickListener = null;
 
@@ -192,14 +194,27 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		final double sectorSize = 2d / captions.size();
 		double sectorStart = 1.5;
 		double sectorEnd = sectorStart + sectorSize;
-		for (final String color : colors) {
+		for (int i = 0; i < colors.size(); i++) {
+			final String color = colors.get(i);
+			final int lineWidth = lineWidths.get(i);
+			final String lineColor = lineColors.get(i);
+
 			ctx.beginPath();
 			ctx.setFillStyle(color);
-			ctx.arc(CANVAS_SIZE_PX / 2, CANVAS_SIZE_PX / 2, OUTER_RADIUS,
-					Math.PI * sectorStart, Math.PI * sectorEnd, false);
-			ctx.arc(CANVAS_SIZE_PX / 2, CANVAS_SIZE_PX / 2, INNER_RADIUS,
-					Math.PI * sectorEnd, Math.PI * sectorStart, true);
+			ctx.setStrokeStyle(lineColor);
+			ctx.setLineWidth(lineWidth);
+			ctx.arc(CANVAS_SIZE_PX / 2, CANVAS_SIZE_PX / 2,
+					OUTER_RADIUS - Math.ceil(lineWidth / 2), Math.PI
+							* sectorStart, Math.PI * sectorEnd, false);
+			ctx.arc(CANVAS_SIZE_PX / 2, CANVAS_SIZE_PX / 2,
+					INNER_RADIUS + Math.ceil(lineWidth / 2), Math.PI
+							* sectorEnd, Math.PI * sectorStart, true);
+			ctx.closePath();
 			ctx.fill();
+
+			if (lineWidth > 0) {
+				ctx.stroke();
+			}
 
 			sectorStart = sectorEnd;
 			sectorEnd += sectorSize;
@@ -246,6 +261,8 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		RootPanel.get().getElement().appendChild(root);
 
 		colors = new ArrayList<String>();
+		lineWidths = new ArrayList<Integer>();
+		lineColors = new ArrayList<String>();
 
 		for (final String caption : captions) {
 			final com.google.gwt.user.client.Element menuItem = DOM.createDiv();
@@ -253,8 +270,15 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 			menuItem.setAttribute("caption", caption);
 			root.appendChild(menuItem);
 			final ComputedStyle style = new ComputedStyle(menuItem);
+
 			final String bgColor = style.getProperty("background-color");
 			colors.add(bgColor);
+
+			final int lineWidth = style.getIntProperty("border-left-width");
+			lineWidths.add(lineWidth);
+
+			final String lineColor = style.getProperty("border-left-color");
+			lineColors.add(lineColor);
 		}
 
 		root.removeFromParent();
@@ -263,6 +287,8 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	public void setup(final List<String> captions) {
 		this.captions = captions;
 		colors = null;
+		lineColors = null;
+		lineWidths = null;
 	}
 
 	public void setItemClickListener(final ItemClickListener listener) {

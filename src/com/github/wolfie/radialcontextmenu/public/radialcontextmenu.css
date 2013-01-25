@@ -10,4 +10,7 @@
 
 .h-radialcontextmenu .menu {
 	background-color: #BBB;
+	border-width: 1px;
+	border-color: #555;
+	border-style: solid; /* this needs to be here, otherwise calculations will return weird values. */
 }

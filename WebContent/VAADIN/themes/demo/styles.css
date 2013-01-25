@@ -11,4 +11,6 @@
 
 .h-radialcontextmenu .menu:nth-child(3) {
 	background-color: #41b527;
+	border-color: gray;
+	border-width: 4px;
 }
