@@ -47,7 +47,7 @@ public class RadialContextMenuConnector extends AbstractExtensionConnector
 
 	@Override
 	public void onStateChanged(final StateChangeEvent stateChangeEvent) {
-		menu.setup(getState().captions);
+		menu.setup(getState().captions, getState().styleName);
 	}
 
 	@Override

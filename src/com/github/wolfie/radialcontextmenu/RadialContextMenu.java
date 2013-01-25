@@ -67,4 +67,8 @@ public class RadialContextMenu extends AbstractExtension {
 	public void closeIfOpen() {
 		clientRpc.closeIfOpen();
 	}
+
+	public void setStyleName(final String styleName) {
+		getState().styleName = styleName;
+	}
 }

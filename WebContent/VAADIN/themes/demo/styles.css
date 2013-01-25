@@ -1,15 +1,15 @@
 @CHARSET "UTF-8";
 @IMPORT "../reindeer/legacy-styles.css";
 
-.h-radialcontextmenu .menu[caption="First and Close"] {
+.h-radialcontextmenu-custom .menu[caption="First and Close"] {
 	background-color: #e61f6f;
 }
 
-.h-radialcontextmenu .menu[caption="Second Item"] {
+.h-radialcontextmenu-custom .menu[caption="Second Item"] {
 	background-color: #00b4f0;
 }
 
-.h-radialcontextmenu .menu:nth-child(3) {
+.h-radialcontextmenu-custom .menu:nth-child(3) {
 	background-color: #41b527;
 	border-color: gray;
 	border-width: 4px;

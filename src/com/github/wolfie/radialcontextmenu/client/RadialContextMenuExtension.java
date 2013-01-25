@@ -17,6 +17,7 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.ComputedStyle;
@@ -63,6 +64,7 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	private List<String> lineColors;
 	private int itemBeingHovered;
 	private ItemClickListener itemClickListener = null;
+	private String styleName;
 
 	public void extend(final Widget widget) {
 		widget.addDomHandler(this, ContextMenuEvent.getType());
@@ -86,7 +88,9 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		event.getNativeEvent();
 
 		canvas = Canvas.createIfSupported();
-		canvas.setStyleName(CANVAS_CLASSNAME);
+
+		setStyleNames(canvas);
+
 		canvas.getElement().setPropertyInt("width", CANVAS_SIZE_PX);
 		canvas.getElement().setPropertyInt("height", CANVAS_SIZE_PX);
 		final Style canvasStyle = canvas.getElement().getStyle();
@@ -108,6 +112,19 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		event.preventDefault();
 	}
 
+	private void setStyleNames(final UIObject object) {
+		setStyleNames(object.getElement());
+	}
+
+	private void setStyleNames(final com.google.gwt.user.client.Element element) {
+		String className = CANVAS_CLASSNAME;
+		if (styleName != null && !styleName.trim().equals("")) {
+			className += " " + CANVAS_CLASSNAME + "-" + styleName + " "
+					+ styleName;
+		}
+		element.setClassName(className);
+	}
+
 	private static void debug(final String string) {
 		VConsole.log("[RadialContextMenuExtension] " + string);
 	}
@@ -118,8 +135,9 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 			previewHandler = null;
 		}
 
-		if (canvas != null && canvas.getParent() != null) {
+		if (canvas != null) {
 			canvas.removeFromParent();
+			canvas = null;
 		}
 	}
 
@@ -258,7 +276,7 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 
 	private void setupMenuItemStyles() {
 		final com.google.gwt.user.client.Element root = DOM.createDiv();
-		root.setClassName(CANVAS_CLASSNAME);
+		setStyleNames(root);
 		RootPanel.get().getElement().appendChild(root);
 
 		colors = new ArrayList<String>();
@@ -285,8 +303,10 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		root.removeFromParent();
 	}
 
-	public void setup(final List<String> captions) {
+	public void setup(final List<String> captions, final String styleName) {
 		this.captions = captions;
+		this.styleName = styleName;
+
 		colors = null;
 		lineColors = null;
 		lineWidths = null;

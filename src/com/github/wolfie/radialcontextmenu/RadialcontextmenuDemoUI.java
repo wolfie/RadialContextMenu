@@ -20,8 +20,6 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("demo")
 public class RadialcontextmenuDemoUI extends UI {
 
-	private RadialContextMenu radialContextMenu;
-
 	@Override
 	protected void init(final VaadinRequest request) {
 		final VerticalLayout layout = new VerticalLayout();
@@ -29,37 +27,65 @@ public class RadialcontextmenuDemoUI extends UI {
 		layout.setMargin(true);
 		setContent(layout);
 
-		final Button button = new Button("Right Click Me");
-		button.addClickListener(new Button.ClickListener() {
+		final Button button1 = new Button("Right Click Me");
+		button1.addClickListener(new Button.ClickListener() {
 			@Override
 			public void buttonClick(final ClickEvent event) {
-				button.setCaption("No, I Said \"Right Click\"");
+				button1.setCaption("No, I Said \"Right Click\"");
 			}
 		});
-		layout.addComponent(button);
-		layout.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+		layout.addComponent(button1);
+		layout.setComponentAlignment(button1, Alignment.MIDDLE_CENTER);
 
-		radialContextMenu = new RadialContextMenu();
-		radialContextMenu.addMenuItem("First and Close",
-				new MenuSelectListener() {
-					@Override
-					public void menuSelected(final MenuSelectEvent e) {
-						Notification.show("First Item Pressed");
-						e.getSource().closeIfOpen();
-					}
-				});
-		radialContextMenu.addMenuItem("Second Item", new MenuSelectListener() {
+		final RadialContextMenu menu1 = new RadialContextMenu();
+		menu1.setStyleName("custom");
+		menu1.addMenuItem("First and Close", new MenuSelectListener() {
+			@Override
+			public void menuSelected(final MenuSelectEvent e) {
+				Notification.show("First Item Pressed");
+				e.getSource().closeIfOpen();
+			}
+		});
+		menu1.addMenuItem("Second Item", new MenuSelectListener() {
 			@Override
 			public void menuSelected(final MenuSelectEvent e) {
 				Notification.show("Second Item Pressed");
 			}
 		});
-		radialContextMenu.addMenuItem("Third Item", new MenuSelectListener() {
+		menu1.addMenuItem("Third Item", new MenuSelectListener() {
 			@Override
 			public void menuSelected(final MenuSelectEvent e) {
 				Notification.show("Third Item Pressed");
 			}
 		});
-		radialContextMenu.extend(button);
+		menu1.extend(button1);
+
+		final Button button2 = new Button("Right Click Me");
+		button1.addClickListener(new Button.ClickListener() {
+			@Override
+			public void buttonClick(final ClickEvent event) {
+				button2.setCaption("No, I Said \"Right Click\"");
+			}
+		});
+
+		layout.addComponent(button2);
+		layout.setComponentAlignment(button2, Alignment.MIDDLE_CENTER);
+
+		final RadialContextMenu menu2 = new RadialContextMenu();
+		menu2.addMenuItem("First and Close", new MenuSelectListener() {
+			@Override
+			public void menuSelected(final MenuSelectEvent e) {
+				Notification.show("First Item Pressed");
+				e.getSource().closeIfOpen();
+			}
+		});
+		menu2.addMenuItem("Second Item", new MenuSelectListener() {
+			@Override
+			public void menuSelected(final MenuSelectEvent e) {
+				Notification.show("Second Item Pressed");
+			}
+		});
+
+		menu2.extend(button2);
 	}
 }
