@@ -54,8 +54,9 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 	private static final String CANVAS_CLASSNAME = "h-radialcontextmenu";
 	private static final String MENUITEM_CLASSNAME = "menu";
 
-	private Canvas canvas;
-	private HandlerRegistration previewHandler = null;
+	private static Canvas canvas;
+	private static HandlerRegistration previewHandler = null;
+
 	private List<String> captions;
 	private List<String> colors;
 	private List<Integer> lineWidths;
@@ -111,7 +112,7 @@ public class RadialContextMenuExtension implements ContextMenuHandler {
 		VConsole.log("[RadialContextMenuExtension] " + string);
 	}
 
-	public void close() {
+	public static void close() {
 		if (previewHandler != null) {
 			previewHandler.removeHandler();
 			previewHandler = null;

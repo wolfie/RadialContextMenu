@@ -29,7 +29,7 @@ public class RadialContextMenuConnector extends AbstractExtensionConnector
 
 					@Override
 					public void closeIfOpen() {
-						menu.close();
+						RadialContextMenuExtension.close();
 					}
 				});
 		menu.setItemClickListener(this);
